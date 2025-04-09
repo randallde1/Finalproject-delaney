@@ -153,7 +153,7 @@ gzip SRR*
 ```
 When you do this step make sure that you cd into the casava_reads directory 
 
-5. Feed qiime the raw reads
+5. Feed qiime the raw reads (make sure to be in the microbiome_proect directory when doing this step)
 ```         
 qiime tools import \
   --type SampleData[PairedEndSequencesWithQuality] \
