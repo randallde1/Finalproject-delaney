@@ -151,6 +151,7 @@ conda activate qiime2-amplicon-2024.2
 ```
 gzip SRR*
 ```
+** When you do this step make sure that you cd into the casava_reads directory **
 5. Feed qiime the raw reads
 ```         
 qiime tools import \
