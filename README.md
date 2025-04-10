@@ -208,6 +208,45 @@ git push origin main
 salloc --mem=100G --time=6:00:00 --cpus-per-task=32 
 ```
 2. Run DADA2 to denoise and generate ASVs:
+
+```
+vi dada.slurm
+```
+- Type I and paste
+```
+#!/bin/bash
+#SBATCH --job-name=dada2_denoise
+#SBATCH --output=dada2_denoise.out
+#SBATCH --error=dada2_denoise.err
+#SBATCH --time=06:00:00
+#SBATCH --mem=100G
+#SBATCH --cpus-per-task=32
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=drandal1@svsu.edu
+
+# Load conda and activate the QIIME2 environment
+module load anaconda3
+conda activate qiime2-amplicon-2024.2
+
+# Run DADA2 denoising
+qiime dada2 denoise-paired \
+    --i-demultiplexed-seqs reads_qza/reads.qza \
+    --p-trim-left-f 0 \
+    --p-trim-left-r 0 \
+    --p-trunc-len-f 250 \
+    --p-trunc-len-r 250 \
+    --p-n-threads 32 \
+    --o-table feature-table.qza \
+    --o-representative-sequences rep-seqs.qza \
+    --o-denoising-stats denoising-stats.qza
+```
+- Exit : esc :wq
+- Run the script
+
+```
+sbatch dada.slurm
+```
+
 ```bash
 qiime dada2 denoise-paired \
     --i-demultiplexed-seqs reads_qza/reads.qza \
