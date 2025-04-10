@@ -173,6 +173,19 @@ qiime cutadapt trim-paired \
   --p-no-indels \
   --o-trimmed-sequences reads_qza/reads_trimmed.qza
 ```
+New code, relaxed:
+
+```
+qiime cutadapt trim-paired \
+  --i-demultiplexed-sequences reads_qza/reads.qza \
+  --p-cores 4 \
+  --p-front-f ACGCGHNRAACCTTACC \
+  --p-front-r ACGGGCRGTGWGTRCAA \
+  --p-match-adapter-wildcards \
+  --p-error-rate 0.1 \
+  --o-trimmed-sequences reads_qza/reads_trimmed.qza
+```
+
 7. Visualize your data now
 ```         
 qiime demux summarize \
